@@ -13,6 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use App\Http\Controllers\DoseController;
+
+Route::get('/', [DoseController::class, 'index']);
+Route::get('/doses/create', [DoseController::class, 'create']);
+
+Route::get('/contact', function () {
+    return view('contact');
 });
+
+Route::get('/produtos', function () {
+
+    $busca = request('search');
+
+    return view('products', ['busca' => $busca]);
+});
+
+Route::get('/produtos_teste/{id?}', function ($id = null) {
+    return view('product', ['id' => $id]);
+});
+
+
